@@ -1,6 +1,28 @@
 .App {
   text-align: center;
+  background-color: #89c2d9;
+  min-height: 100vh;
 }
+
+.LeftPanel {
+  background-color: #2c7da0;
+  min-height: 100vh;
+  height: 100%;
+  color: white;
+}
+
+.MainArea {
+  /*background-color: azure;*/
+  height: calc(100vh - 80px);
+  margin: 40px;
+  overflow-y: scroll;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 .App-logo {
   height: 40vmin;

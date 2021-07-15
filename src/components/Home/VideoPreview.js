@@ -5,9 +5,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import {CardActionArea} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import {useDispatch} from "react-redux";
-import {setSelectedVideo} from "../../stateSlices/playerSlice";
-import {IndexPlayerPage, setIndex} from "../../stateSlices/indexSlice";
 
 /**
  * Render a video preview on the homepage
@@ -17,15 +14,15 @@ import {IndexPlayerPage, setIndex} from "../../stateSlices/indexSlice";
  */
 export default function VideoPreview(props) {
     const {avatarImg, title, description} = props.video
-    const dispatch = useDispatch();
 
     return (
         <Grid key={"video-preview-" + props.id} item xs={4}>
             <Card elevation={7} style={{maxWidth: 345, maxHeight: 500}}>
-                <CardActionArea onClick={() => {
-                    dispatch(setSelectedVideo(props.video))
-                    dispatch(setIndex(IndexPlayerPage))
-                }}>
+                <CardActionArea onClick={
+                    /* @TODO: what should you do to the redux store?
+                    * 1. set selected video
+                    * 2. navigate to the player page
+                    * */ }>
                     <CardMedia style={{height: 200}} image={avatarImg}/>
                     <CardContent style={{alignItems: "left"}}>
                         <Typography gutterBottom variant="h6" component="div">

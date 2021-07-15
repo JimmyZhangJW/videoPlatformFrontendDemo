@@ -8,38 +8,26 @@ import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
 import MovieCreationIcon from "@material-ui/icons/MovieCreation";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
-import { useSelector, useDispatch } from "react-redux";
-import {IndexHomePage, IndexPlayerPage, IndexUploadPage, setIndex} from "../../stateSlices/indexSlice";
 
 export function LeftPanel() {
-  const selectedIndex = useSelector(state => state.indexer.selectedIndex);
-  const dispatch = useDispatch();
+
   return (
     <div>
       <List component="nav" aria-label="main mailbox folders">
-        <ListItemButton
-          selected={selectedIndex === IndexHomePage}
-          onClick={() => dispatch(setIndex(IndexHomePage))}
-        >
+        <ListItemButton>
           <ListItemIcon>
             <MovieCreationIcon />
           </ListItemIcon>
           <ListItemText primary="主页" />
         </ListItemButton>
-        <ListItemButton
-          selected={selectedIndex === IndexPlayerPage}
-          onClick={() => dispatch(setIndex(IndexPlayerPage))}
-        >
+        <ListItemButton>
           <ListItemIcon>
             <OndemandVideoIcon />
           </ListItemIcon>
           <ListItemText primary="播放器" />
         </ListItemButton>
         <Divider />
-        <ListItemButton
-          selected={selectedIndex === IndexUploadPage}
-          onClick={() => dispatch(setIndex(IndexUploadPage))}
-        >
+        <ListItemButton>
           <ListItemIcon>
             <CloudUploadIcon />
           </ListItemIcon>

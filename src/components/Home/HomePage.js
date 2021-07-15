@@ -11,16 +11,12 @@ import { useSelector } from "react-redux";
  * @constructor
  */
 export default function HomePage() {
-  const videos = useSelector(state => state.player.allVideos);
-
   return (
     <div>
       <Grid container spacing={2} rowSpacing={4}>
-        {/*render video previews*/}
-        {videos.map((video, idx) => <VideoPreview video={video} id={idx}/>)}
+        {/* @TODO: how can you render video previews using VideoPreview? */}
 
-        {/*render video placeholders*/}
-        {[...Array(20)].map(() => <DummyPreview/> )}
+        {/* @TODO: how can you render 20 video placeholders using DummyPreview? */}
       </Grid>
     </div>
   );

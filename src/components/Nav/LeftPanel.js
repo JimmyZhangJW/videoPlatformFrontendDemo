@@ -9,7 +9,7 @@ import MovieCreationIcon from "@material-ui/icons/MovieCreation";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setIndex } from "../../stateSlices/indexSlice";
+import {IndexHomePage, IndexPlayerPage, IndexUploadPage, setIndex} from "../../stateSlices/indexSlice";
 
 export function LeftPanel() {
   const selectedIndex = useSelector(state => state.indexer.selectedIndex);
@@ -18,8 +18,8 @@ export function LeftPanel() {
     <div>
       <List component="nav" aria-label="main mailbox folders">
         <ListItemButton
-          selected={selectedIndex === 0}
-          onClick={() => dispatch(setIndex(0))}
+          selected={selectedIndex === IndexHomePage}
+          onClick={() => dispatch(setIndex(IndexHomePage))}
         >
           <ListItemIcon>
             <MovieCreationIcon />
@@ -27,8 +27,8 @@ export function LeftPanel() {
           <ListItemText primary="主页" />
         </ListItemButton>
         <ListItemButton
-          selected={selectedIndex === 1}
-          onClick={() => dispatch(setIndex(1))}
+          selected={selectedIndex === IndexPlayerPage}
+          onClick={() => dispatch(setIndex(IndexPlayerPage))}
         >
           <ListItemIcon>
             <OndemandVideoIcon />
@@ -37,8 +37,8 @@ export function LeftPanel() {
         </ListItemButton>
         <Divider />
         <ListItemButton
-          selected={selectedIndex === 2}
-          onClick={() => dispatch(setIndex(2))}
+          selected={selectedIndex === IndexUploadPage}
+          onClick={() => dispatch(setIndex(IndexUploadPage))}
         >
           <ListItemIcon>
             <CloudUploadIcon />

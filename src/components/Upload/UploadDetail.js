@@ -5,20 +5,17 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import { useSelector, useDispatch } from "react-redux";
 import Skeleton from "@material-ui/core/Skeleton";
-import {
-  updateAvatarImg,
-  updateTitle,
-  updateDescription
-} from "../../stateSlices/uploadSlice";
 
-export default function UploadDetail() {
+/**
+ * UploadDetail renders upload details
+ * @param props requires title, avatarImg, description, setTitle, setAvatarImg, setDescription
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function UploadDetail(props) {
   const avatarRef = React.createRef();
-  const avatarImg = useSelector(state => state.uploader.avatarImg);
-  const description = useSelector(state => state.uploader.description);
-  const title = useSelector(state => state.uploader.title);
-  const dispatch = useDispatch();
+  const {title, avatarImg, description, setTitle, setAvatarImg, setDescription} = props
 
   let cardBody;
   if (avatarImg === "") {
@@ -53,9 +50,7 @@ export default function UploadDetail() {
                   return;
                 }
                 reader.readAsDataURL(e.target.files[0]);
-                reader.onload = () => {
-                  dispatch(updateAvatarImg(reader.result));
-                };
+                reader.onload = () => setAvatarImg(reader.result);
               }}
             />
             <Button
@@ -74,9 +69,7 @@ export default function UploadDetail() {
         label="标题"
         placeholder="标题哦"
         value={title}
-        onChange={e => {
-          dispatch(updateTitle(e.target.value));
-        }}
+        onChange={e => setTitle(e.target.value)}
       />
 
       <TextField
@@ -87,9 +80,7 @@ export default function UploadDetail() {
         rows={4}
         value={description}
         placeholder="请填写全面的简介，让大家更好地了解你的视频吧"
-        onChange={e => {
-          dispatch(updateDescription(e.target.value));
-        }}
+        onChange={e => setDescription(e.target.value)}
       />
     </div>
   );

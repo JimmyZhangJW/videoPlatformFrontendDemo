@@ -1,59 +1,26 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Skeleton from "@material-ui/core/Skeleton";
 import VideoPreview from "./VideoPreview";
+import DummyPreview from "./DummyPreview";
+
 import { useSelector } from "react-redux";
 
-const generateDummy = num => {
-  let ids = [];
-  for (let i = 0; i < num; i++) {
-    ids.push(i);
-  }
-  return ids.map(id => {
-    return (
-      <Grid key={"dummy" + id} item xs={4}>
-        <Box>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            style={{ maxWidth: 345 }}
-            width="100%"
-            height={200}
-          />
-          <Skeleton animation="wave" style={{ maxWidth: 345 }} width="100%" />
-          <Skeleton animation="wave" style={{ maxWidth: 345 }} width="100%" />
-          <Skeleton animation="wave" style={{ maxWidth: 345 }} width="100%" />
-          <Skeleton animation="wave" width="60%" />
-        </Box>
-      </Grid>
-    );
-  });
-};
-
-const generatePreviews = previews => {
-  return previews.map((video, id) => {
-    return (
-      <Grid key={"cardGrid" + id} item xs={4}>
-        <VideoPreview
-          id={id}
-          title={video.title}
-          url={"http://localhost:8080/" + video.videoURI}
-          avatarImg={video.avatarImg}
-          description={video.description}
-        />
-      </Grid>
-    );
-  });
-};
-
+/**
+ * Render a homepage with video previews and dummy placeholders
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function HomePage() {
-  const previews = useSelector(state => state.player.allVideos);
+  const videos = useSelector(state => state.player.allVideos);
+
   return (
     <div>
       <Grid container spacing={2} rowSpacing={4}>
-        {generatePreviews(previews)}
-        {generateDummy(20)}
+        {/*render video previews*/}
+        {videos.map((video, idx) => <VideoPreview video={video} id={idx}/>)}
+
+        {/*render video placeholders*/}
+        {[...Array(20)].map(() => <DummyPreview/> )}
       </Grid>
     </div>
   );

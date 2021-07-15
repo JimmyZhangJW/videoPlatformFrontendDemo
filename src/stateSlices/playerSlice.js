@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fakeVideo } from "../components/Home/fakeVideoData";
+import * as fakeVideos from "../FakeVideos.json"
 
 export const playerSlice = createSlice({
   name: "player",
   initialState: {
-    allVideos: [fakeVideo],
-    selectedVideo: {},
+    allVideos: fakeVideos.videos,
+    selectedVideo: null,
   },
   reducers: {
     setVideos: (state, action) => {

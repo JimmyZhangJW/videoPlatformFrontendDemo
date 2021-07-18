@@ -15,7 +15,9 @@
 ![播放器](public/demo.png)
 ![上传](public/demo2.png)
 
-## B站视频链接： 【待更新。。。】
+## B站视频传送门： 【https://www.bilibili.com/video/BV14q4y1W7qQ?share_source=copy_web 】
 
 ## 如何配置环境呢？
 yarn install
+## 如何运行呢？
+yarn start

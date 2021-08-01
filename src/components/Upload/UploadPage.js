@@ -45,6 +45,8 @@ export default function UploadPage() {
         setComputedChunkNum(0)
         fileChunkMD5Local = []
         setFileSize(0)
+        setSuccess(false)
+        setLoading(false)
     }
 
     const onVideoUploadChanged = e => {

@@ -23,7 +23,7 @@ export default function HomePage() {
         }
 
         fetchMyVideos()
-    })
+    }, [])
 
     return (
         <div>

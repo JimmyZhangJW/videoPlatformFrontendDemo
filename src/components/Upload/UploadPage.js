@@ -160,9 +160,6 @@ export default function UploadPage() {
         do {
             // Upload fileChunks onto server
             for (let i = 0; i < fileChunkMD5s.length; i++) {
-                // if (!(fileChunkMD5s[i] in missingHashes)) {
-                //     continue
-                // }
                 let formData = new FormData();
                 formData.append("content", fileChunks[i])
                 formData.append("index", i)
@@ -187,11 +184,13 @@ export default function UploadPage() {
     const handleFinishUploading = () => {
         setSuccess(true)
         setLoading(false)
+
         async function fetchMyVideos() {
             let response = await fetch('http://localhost:8080/videoMetas')
             response = await response.json()
             dispatch(setVideos(response))
         }
+
         fetchMyVideos()
         setTimeout(() => {
             reset()
@@ -215,13 +214,14 @@ export default function UploadPage() {
 
             <React.Fragment>
                 {step === 0 ? <UploadButton onChange={onVideoUploadChanged}/> :
-                    <UploadDetail loading={loading} fileMD5={fileMD5} fileChunkMD5s={fileChunkMD5s} title={title} avatarImg={avatarImg} description={description}
+                    <UploadDetail loading={loading} fileMD5={fileMD5} fileChunkMD5s={fileChunkMD5s} title={title} avatarImg={avatarImg}
+                                  description={description}
                                   setTitle={setTitle} totalChunkNum={totalChunkNum} computedChunkNum={computedChunkNum}
                                   setAvatarImg={setAvatarImg} setDescription={setDescription}/>}
-                {step === steps.length - 1 ? (
+                {step === steps.length - 1 && (
                     <Box sx={{display: "flex", flexDirection: "row", pt: 2}}>
                         <Button
-                            style={{color: "white", "max-height":"50px", "align-self":"center"}}
+                            style={{color: "white", "max-height": "50px", "align-self": "center"}}
                             variant="contained"
                             disabled={step === 0}
                             onClick={() => reset()}
@@ -232,10 +232,9 @@ export default function UploadPage() {
 
                         <Box sx={{flex: "1 1 auto"}}/>
 
-                        <UploadLoadingButton disabled={fileMD5 === "" || computedChunkNum !== totalChunkNum} loading={loading} success={success} handleButtonClick={handleUpload}/>
+                        <UploadLoadingButton disabled={fileMD5 === "" || computedChunkNum !== totalChunkNum} loading={loading} success={success}
+                                             handleButtonClick={handleUpload}/>
                     </Box>
-                ) : (
-                    <div/>
                 )}
             </React.Fragment>
         </Box>

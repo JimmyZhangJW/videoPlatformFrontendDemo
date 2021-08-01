@@ -22,8 +22,8 @@ export default function PlayerPage(props) {
                     height="90%"
                     playing={playing}
                     pip={props.hidden && playing}
-                    onPlay={()=> setPlaying(true)}
-                    onPause={()=>setPlaying(false)}
+                    onPlay={() => setPlaying(true)}
+                    onPause={() => setPlaying(false)}
                 />
                 <p className="Description"> {description}</p>
             </div>

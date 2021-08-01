@@ -21,8 +21,9 @@ export default function HomePage() {
             response = await response.json()
             dispatch(setVideos(response))
         }
+
         fetchMyVideos()
-    }, [])
+    })
 
     return (
         <div>
@@ -30,7 +31,7 @@ export default function HomePage() {
                 {/*render video previews*/}
                 {videos.map((video, idx) => <VideoPreview video={video} id={idx}/>)}
 
-                {/*render video placeholders*/}
+                {/*render video placeholders when the real video data is still loading*/}
                 {videos.length === 0 && [...Array(10)].map(() => <DummyPreview/>)}
             </Grid>
         </div>

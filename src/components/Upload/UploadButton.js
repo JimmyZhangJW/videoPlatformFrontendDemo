@@ -18,7 +18,7 @@ export default function UploadButton(props) {
                     <input
                         type="file"
                         id="video_file"
-                        accept="video/mp4,video/x-m4v,video/*"
+                        accept="video/mp4,video/webm"
                         onChange={(e) => onChange(e)}
                     />
                     <CloudUploadIcon className="cloud-icon"/>

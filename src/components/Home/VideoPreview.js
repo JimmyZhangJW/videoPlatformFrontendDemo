@@ -16,7 +16,7 @@ import {IndexPlayerPage, setIndex} from "../../stateSlices/indexSlice";
  * @constructor
  */
 export default function VideoPreview(props) {
-    const {avatarImg, title, description} = props.video
+    const {avatar_img, title, description} = props.video
     const dispatch = useDispatch();
 
     return (
@@ -26,7 +26,7 @@ export default function VideoPreview(props) {
                     dispatch(setSelectedVideo(props.video))
                     dispatch(setIndex(IndexPlayerPage))
                 }}>
-                    <CardMedia style={{height: 200}} image={avatarImg}/>
+                    <CardMedia style={{height: 200}} image={avatar_img}/>
                     <CardContent style={{alignItems: "left"}}>
                         <Typography gutterBottom variant="h6" component="div">
                             {title}

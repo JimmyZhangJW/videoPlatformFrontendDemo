@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import VideoPreview from "./VideoPreview";
 import DummyPreview from "./DummyPreview";
 
-import { useSelector } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {setVideos} from "../../stateSlices/playerSlice"
 
 /**
  * Render a homepage with video previews and dummy placeholders
@@ -11,17 +12,27 @@ import { useSelector } from "react-redux";
  * @constructor
  */
 export default function HomePage() {
-  const videos = useSelector(state => state.player.allVideos);
+    const videos = useSelector(state => state.player.allVideos);
+    const dispatch = useDispatch();
 
-  return (
-    <div>
-      <Grid container spacing={2} rowSpacing={4}>
-        {/*render video previews*/}
-        {videos.map((video, idx) => <VideoPreview video={video} id={idx}/>)}
+    useEffect(() => {
+        async function fetchMyVideos() {
+            let response = await fetch('http://localhost:8080/videoMetas')
+            response = await response.json()
+            dispatch(setVideos(response))
+        }
+        fetchMyVideos()
+    }, [])
 
-        {/*render video placeholders*/}
-        {[...Array(20)].map(() => <DummyPreview/> )}
-      </Grid>
-    </div>
-  );
+    return (
+        <div>
+            <Grid container spacing={2} rowSpacing={4}>
+                {/*render video previews*/}
+                {videos.map((video, idx) => <VideoPreview video={video} id={idx}/>)}
+
+                {/*render video placeholders*/}
+                {videos.length === 0 && [...Array(10)].map(() => <DummyPreview/>)}
+            </Grid>
+        </div>
+    );
 }

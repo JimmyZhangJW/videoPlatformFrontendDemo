@@ -161,16 +161,20 @@ export default function UploadPage() {
         // let missingHashes = fileChunkMD5s
         do {
             // Upload fileChunks onto server
+            let promises = []
             for (let i = 0; i < fileChunkMD5s.length; i++) {
                 let formData = new FormData();
                 formData.append("content", fileChunks[i])
                 formData.append("index", i)
                 formData.append("hash", fileChunkMD5s[i])
                 formData.append("file_hash", fileMD5)
-                fetch('http://localhost:8080/videoChunks', {method: "POST", body: formData, mode: 'no-cors'});
+                const promise = new Promise((resolve, reject) => {
+                    fetch('http://localhost:8080/videoChunks', {method: "POST", body: formData, mode: 'no-cors'}).then(() => resolve())
+                })
+                promises.push(promise)
             }
-
-            // try to merge chunks
+            await Promise.all(promises)
+            // try to merge chunks after all chunks are uploaded
             let mergeFormData = new FormData();
             mergeFormData.append("hash", fileMD5)
             let response = await fetch("http://localhost:8080/merge", {
